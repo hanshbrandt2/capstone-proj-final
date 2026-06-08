@@ -1,0 +1,14 @@
+# Tested with (Python 3.11+): polars 1.39.0, pandas 3.0.1, numpy 2.4.3,
+# scikit-learn 1.8.0, scipy 1.17.1, matplotlib 3.10.8, seaborn 0.13.2.
+# Results are deterministic (fixed seeds); pin these exact versions to reproduce
+# the embedded numbers bit-for-bit, or use the loose bounds below to just run it.
+polars>=1.0
+pandas>=2.0
+numpy
+scikit-learn>=1.4
+scipy
+matplotlib
+seaborn
+nbformat
+jupyter
+jupyterlab
