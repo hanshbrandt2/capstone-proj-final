@@ -1,5 +1,10 @@
 # Intraday Regime Classification in WTI Crude Oil Futures: Final Model
 
+Berkeley Professional Certificate in ML/AI, Module 24: final report and model.
+Deliverable: [`capstone.ipynb`](capstone.ipynb). All outputs are embedded, so
+GitHub renders the notebook directly, no execution needed. Every figure is also
+in [`images/`](images).
+
 This is the modelling follow-up to my Module 20.1 EDA. The EDA built and cleaned
 the data and ran a first baseline. Here I do the full modelling: three model
 families, each grid-searched and cross-validated, tested out of sample across a
@@ -28,18 +33,17 @@ edge, and knowing that stops capital chasing it.
 | Bars | 5,280,818 (4,084,036 after roll-cleaning) |
 | Features | 60 engineered |
 
-The matrix ships as eight two-year parquet shards in `data/` (each under 100 MB,
-686 MB total), so the notebook re-runs end to end on a clone, not only renders from
-embedded outputs. It is assembled from an internal CME pipeline (build recipe kept
-local). Slow features (term structure, open interest, the vol surface) are
-end-of-session quantities carried at a one-session lag, the same information cadence
-a desk has intraday.
+The matrix is not committed. It is too large to redistribute, and the notebook
+ships with every output embedded. It is assembled from an internal CME pipeline
+(recipe kept locally). Slow features (term structure, open interest, the vol
+surface) are end-of-session quantities carried at a one-session lag, the same
+information cadence a desk has intraday.
 
 ## Method
 
 - Models: multinomial logistic regression (L2), random forest, histogram gradient
   boosting (linear, bagged trees, boosted trees).
-- Tuning: grid search with an expanding-window `TimeSeriesSplit`, on a held-out
+- Tuning: grid search with an expanding-window TimeSeriesSplit, on a held-out
   tuning block (history through 2012). No evaluation row is seen during tuning.
 - Evaluation: walk-forward (12-month train, 1-month test, monthly step) across
   155 folds (2013-01 → 2025-12). Label thresholds recomputed per training fold.
@@ -118,7 +122,7 @@ and figures embedded. To re-execute:
 
 ```
 pip install -r requirements.txt
-# the eight matrix shards already ship in data/
+# place the matrix shards in data/ (see the notebook's data section)
 jupyter nbconvert --to notebook --execute capstone.ipynb --output capstone.ipynb
 ```
 
