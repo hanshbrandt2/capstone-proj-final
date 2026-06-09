@@ -15,7 +15,7 @@ long walk-forward, and then put through a P&L net of trading costs.
 I ask one question: can the next 60 minutes of WTI crude direction be predicted
 from price, volatility, term-structure, open-interest and options signals? The
 target is the project's three-state regime: UP, DOWN, MR (mean-reversion),
-defined to spec from forward vol-adjusted return AND forward path efficiency
+defined to spec from forward vol-adjusted return and forward path efficiency
 versus per-fold quantiles. NO_TRADE windows are dropped, so the model only learns
 from clean examples.
 
@@ -33,8 +33,9 @@ edge, and knowing that stops capital chasing it.
 | Bars | 5,280,818 (4,084,036 after roll-cleaning) |
 | Features | 60 engineered |
 
-The matrix is not committed. It is too large to redistribute, and the notebook
-ships with every output embedded. It is assembled from an internal CME pipeline
+The matrix ships as eight two-year parquet shards in `data/` (each under 100 MB,
+about 650 MB total), so the notebook re-runs end to end on a clone, not only
+renders from embedded outputs. It is assembled from an internal CME pipeline
 (recipe kept locally). Slow features (term structure, open interest, the vol
 surface) are end-of-session quantities carried at a one-session lag, the same
 information cadence a desk has intraday.
@@ -122,7 +123,7 @@ and figures embedded. To re-execute:
 
 ```
 pip install -r requirements.txt
-# place the matrix shards in data/ (see the notebook's data section)
+# the eight matrix shards already ship in data/
 jupyter nbconvert --to notebook --execute capstone.ipynb --output capstone.ipynb
 ```
 
