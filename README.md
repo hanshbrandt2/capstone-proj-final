@@ -35,9 +35,8 @@ edge, and knowing that stops capital chasing it.
 
 The matrix ships as eight two-year parquet shards in `data/` (each under 100 MB,
 about 650 MB total), so the notebook re-runs end to end on a clone, not only
-renders from embedded outputs. It is assembled from an internal CME pipeline
-(recipe kept locally). Slow features (term structure, open interest, the vol
-surface) are end-of-session quantities carried at a one-session lag, the same
+renders from embedded outputs. Slow features (term structure, open interest, the
+vol surface) are end-of-session quantities carried at a one-session lag, the same
 information cadence a desk has intraday.
 
 ## Method
