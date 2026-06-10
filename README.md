@@ -5,19 +5,19 @@ Deliverable: [`capstone.ipynb`](capstone.ipynb). All outputs are embedded, so
 GitHub renders the notebook directly, no execution needed. Every figure is also
 in [`images/`](images).
 
-This is the modelling follow-up to my Module 20.1 EDA. The EDA built and cleaned
-the data and ran a first baseline. Here I do the full modelling: three model
-families, each grid-searched and cross-validated, tested out of sample across a
-long walk-forward, and then put through a P&L net of trading costs.
+This is the modelling follow-up to my Module 20.1 EDA. Here I do the full
+modelling: three model families, each grid-searched and cross-validated, tested
+out of sample across a long walk-forward, and then put through a P&L net of
+trading costs.
 
 ## What this project does
 
 I ask one question: can the next 60 minutes of WTI crude direction be predicted
 from price, volatility, term-structure, open-interest and options signals? The
 target is the project's three-state regime: UP, DOWN, MR (mean-reversion),
-defined to spec from forward vol-adjusted return and forward path efficiency
-versus per-fold quantiles. NO_TRADE windows are dropped, so the model only learns
-from clean examples.
+defined from forward vol-adjusted return and forward path efficiency versus
+per-fold quantiles. NO_TRADE windows are dropped, so the model only learns from
+clean examples.
 
 For a desk the question is not "build a model". It is "is there an edge here, and
 is it worth trading after costs". A small edge that the spread eats is not an
@@ -33,11 +33,11 @@ edge, and knowing that stops capital chasing it.
 | Bars | 5,280,818 (4,084,036 after roll-cleaning) |
 | Features | 60 engineered |
 
-The matrix ships as eight two-year parquet shards in `data/` (each under 100 MB,
-about 650 MB total), so the notebook re-runs end to end on a clone, not only
-renders from embedded outputs. Slow features (term structure, open interest, the
-vol surface) are end-of-session quantities carried at a one-session lag, the same
-information cadence a desk has intraday.
+The matrix is committed, and the notebook ships with every output embedded, so it
+renders on GitHub without being run. Slow features (term structure, open interest,
+the vol surface) are end-of-session quantities carried at a one-session lag (see
+the [Module 20.1 EDA](https://github.com/hanshbrandt2/capstone-eda) for additional
+info).
 
 ## Method
 
@@ -114,6 +114,9 @@ as open questions.
   obvious second extension.
 - Longer horizons. The slow features move day to day, not minute to minute; they
   may carry more at a one-day or one-week horizon.
+- A different label. Worth testing another target definition, like the
+  triple-barrier method, or just the return distribution moments (mean, vol,
+  skewness, kurtosis).
 
 ## How to read it
 
@@ -127,4 +130,4 @@ jupyter nbconvert --to notebook --execute capstone.ipynb --output capstone.ipynb
 ```
 
 Full execution is under an hour on a 100-core workstation; the grid search and
-walk-forward dominate. Figures are written to `images/` as they render.
+walk-forward dominate. Figures are written to `images/`.
