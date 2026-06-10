@@ -103,7 +103,7 @@ after costs.
 ### Where an edge could still hide (next steps)
 
 These are hypotheses, not results. This dataset cannot test them, so I list them
-as open questions, not claims.
+as open questions.
 
 - Order book / L2 microstructure. On a 60-minute horizon the signal, if there is
   one, lives in the book: depth, queue imbalance, trade flow. A bar-level matrix
