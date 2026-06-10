@@ -36,7 +36,7 @@ edge, and knowing that stops capital chasing it.
 The matrix is committed, and the notebook ships with every output embedded, so it
 renders on GitHub without being run. Slow features (term structure, open interest,
 the vol surface) are end-of-session quantities carried at a one-session lag (see
-the [Module 20.1 EDA](https://github.com/hanshbrandt2/capstone-eda) for additional
+the Module 20.1 EDA for additional
 info).
 
 ## Method
